@@ -1,6 +1,6 @@
 # SMARS Robot - Follow Me Code (L293D / Fundumoto Shield Support)
 
-This project extends [Kevin McAleer’s _Follow Me_ code](https://github.com/kevinmcaleer/follow_me2) to work with a cheap L293D-based motor shield (often referred to as a Fundumoto shield) that you might find on AliExpress. By using the Adafruit Motor Shield (AF) library, we can overcome several compatibility issues.
+This project extends [Kevin McAleer’s _Follow Me_ code](https://github.com/kevinmcaleer/follow_me2) to work with a cheap L293D-based motor shield that you can find on AliExpress. By using the Adafruit Motor Shield (AF) library, we can overcome several compatibility issues.
 
 ## Overview
 
