@@ -1,16 +1,22 @@
-The original code did not support my LD293D board.
+# SMARS Robot - Follow Me Code (L293D / Fundumoto Shield Support)
 
-Using the AF library we have overcome some problems with the cheap Aliexpress shield. It was similar to the shield Kevin identified in the video that was not-compatible due to missing headers. Luckily I had holes to add headers.
+This project extends [Kevin McAleer’s _Follow Me_ code](https://github.com/kevinmcaleer/follow_me2) to work with a cheap L293D-based motor shield (often referred to as a Fundumoto shield) that you might find on AliExpress. By using the Adafruit Motor Shield (AF) library, we can overcome several compatibility issues.
+
+## Overview
+
+- **Original Issue**: The L293D shield from AliExpress did not fully support Kevin’s original code due to missing headers and partial compatibility.
+- **Solution**: I added headers to the shield and adapted the code to use the Adafruit Motor Shield (AF) library with a conditional compile for the buzzer.
+- **Improvements**:
+  - We use `#ifdef FUNDUMOTO_SHIELD` to define a real `beep()` function if the buzzer is present, and a no-op version if not.
+  - Distance is now locally scoped within `loop()`, improving clarity.
+  - We use `else if` for mutually exclusive conditions (forward, backward, etc.).
+  - The beep duration is derived from the distance. If the distance is 0 or negative, we force it to 1 to avoid division by zero or very long beeps.
+  - `ping()` has been renamed to `measureDistance()` for clarity.
+
+## Hardware
+
+- **Motor Shield**: [L293D Shield from AliExpress](https://www.aliexpress.com/item/1005007112191522.html). (Pictures will be uploaded soon.)
+- **Ultrasonic Sensor**: HC-SR04 (with `TRIGGER_PIN` on A2 and `ECHO_PIN` on A3 by default).
+- **Buzzer** (Optional): Required only if you want audible feedback. If your board supports it, define `FUNDUMOTO_SHIELD` and wire it to pin **4**.
 
 
-We use #ifdef FUNDUMOTO_SHIELD to define a real beep function (with a buzzer) and provide a no-op (empty) version if the buzzer is absent. This keeps the code simpler.
-Distance is now local to loop() rather than a global variable, clarifying the code flow.
-For mutually exclusive conditions, else if used, it makes code clearer that only one block will run.
-The beep duration is calculated from the distance. If the distance is 0 or negative, we force it to 1 to avoid division by zero or a very large beep.
-ping() is renamed to measureDistance() for no other reason than personal preference.
-
-Kevins original code can be found here : https://github.com/kevinmcaleer/follow_me2
-Kevins youtube series on bringing SMARS to life is here : https://www.youtube.com/playlist?list=PLU9tksFlQRipcp05lwirpQCswXkhOgy1J
-
-
-Sheild I used : https://www.aliexpress.com/item/1005007112191522.html (I'll upload a picture)
